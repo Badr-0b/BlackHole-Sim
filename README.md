@@ -1,2 +1,70 @@
-# BlackHole-Sim
-i always was fascinated with blackholes as a kid and really loved the interstellar scene (yk the one im talking about) so i decided to work on blackhole simulations in python. will be editing this repo later to make it more professional toned lol and add proper documentation
+# Black Hole Gravitational Lensing — Interactive GPU Simulation
+### Real-time OpenGL shader rendering inspired by *Interstellar’s* black hole scene
+
+This project renders a physically-inspired gravitational lensing simulation in real time using a custom GLSL fragment shader. The effect models how light bends around a massive rotating black hole, producing warped spacetime visuals and an orbiting accretion disk — fully interactive with camera orbit, zoom, and lens mass control.
+
+---
+
+##  Overview
+This application demonstrates how GPU ray-marching, shader-based lens distortion, and OpenGL rendering can be combined to visualize extreme gravitational effects. The black hole's mass controls the intensity of light deflection. Users can freely rotate the camera, zoom, and adjust simulation parameters to observe the lensing effect from different viewpoints.
+
+Originally created as a graphics & physics learning project, this evolved into a full interactive simulation suitable for portfolios and research demonstrations.
+
+---
+
+##  Key Features
+- Real-time GLSL gravitational lensing distortion
+- Rotating accretion disk simulation with Doppler-shift color modulation
+- Ray-based plane intersection grid backdrop
+- Fully interactive camera (orbit + zoom)
+- Adjustable black hole mass in real time
+- Runs natively on OpenGL 3.3 hardware
+
+---
+
+##  Tech Stack
+| Layer | Technology |
+|-------|------------|
+| Rendering | OpenGL 3.3, GLSL |
+| Windowing / Input | GLFW |
+| Python Bindings | PyOpenGL, PyOpenGL_accelerate |
+| Math & Utilities | NumPy |
+| Platform | Desktop (Windows / Linux / macOS if OpenGL 3.3 supported) |
+
+---
+
+##  Installation
+### Requirements
+```bash
+Python 3.8+
+GPU with OpenGL 3.3+
+```
+---
+## Dependencies
+```bash
+pip install PyOpenGL PyOpenGL_accelerate glfw numpy
+```
+
+---
+
+## Usage Guide
+
+| Action             | Control      |
+| ------------------ | ------------ |
+| Orbit camera       | Click + drag |
+| Zoom               | Scroll wheel |
+| Increase lens mass | `]`          |
+| Decrease lens mass | `[`          |
+| Exit               | `Esc`        |
+
+Variables you can tweak in `FRAGMENT_SHADER_SRC`:
+| Name           | Effect                               |
+| -------------- | ------------------------------------ |
+| `spinSpeed`    | Rotation speed of the accretion disk |
+| `lensMass`     | Gravitational lens strength          |
+| `lensRadius`   | Size of the distortion region        |
+| `sphereRadius` | Radius of the singularity sphere     |
+
+---
+
+Last Updated: 1 Dec 2025
