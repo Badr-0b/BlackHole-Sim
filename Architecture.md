@@ -31,4 +31,4 @@ Not a general relativity solver — instead a tuned visual approximation:
 - Normalizes result to maintain valid ray direction
 
 
-LLMs helped SO much. i absolutely DESPISE the controls section, shouldve left it at just raw visual simulation.
+LLMs helped me learn SO much. i absolutely DESPISE the controls section, shouldve left it at just raw visual simulation.
