@@ -201,7 +201,35 @@ void main(){
 }
 """
 
+"""
+Black Hole Gravitational Lensing — Interactive GPU Simulation
+
+This program renders a real-time approximation of gravitational lensing
+using OpenGL and GLSL. A ray for every pixel is bent near a massive sphere
+to emulate spacetime curvature, and a rotating accretion disk reinforces
+the black-hole-like visual appearance.
+
+Primary responsibilities for this python section include:
+- Initialize OpenGL context and GPU shader pipeline
+- Create a fullscreen quad for fragment shader rendering
+- Pass camera and simulation parameters to the shader each frame
+- Process user input (orbit, zoom, mass control)
+"""
+
 def compile_shader(src, shader_type):
+    """
+    Compile a GLSL shader stage.
+
+    Parameters:
+    src (str) – Shader source code (GLSL).
+    shader_type (int) – GL_VERTEX_SHADER or GL_FRAGMENT_SHADER.
+
+    Returns:
+    int – Compiled shader ID.
+
+    Raises:
+    RuntimeError – If compilation fails (error log printed to console).
+    """
     shader = glCreateShader(shader_type)
     glShaderSource(shader, src)
     glCompileShader(shader)
@@ -210,6 +238,16 @@ def compile_shader(src, shader_type):
     return shader
 
 def link_program(vs, fs):
+    """
+    Link a GPU shader program from a vertex and fragment shader.
+
+    Parameters:
+    vs (str) – Vertex shader source.
+    fs (str) – Fragment shader source.
+
+    Returns:
+    int – Linked shader program ID.
+    """
     vs_id = compile_shader(vs, GL_VERTEX_SHADER)
     fs_id = compile_shader(fs, GL_FRAGMENT_SHADER)
     prog = glCreateProgram()
@@ -223,11 +261,26 @@ def link_program(vs, fs):
     return prog
 
 def mouse_button_callback(window, button, action, mods):
+    """
+    Track when the left mouse button is pressed/released.
+
+    Side effect:
+    Updates global 'mouse_down' state.
+    """
     global mouse_down
     if button == glfw.MOUSE_BUTTON_LEFT:
         mouse_down = (action == glfw.PRESS)
 
 def cursor_pos_callback(window, xpos, ypos):
+    """
+    Update camera yaw and pitch while dragging the mouse.
+
+    Parameters:
+    xpos (float), ypos (float) – Current cursor coordinates.
+
+    Side effect:
+    Updates global yaw/pitch and applies clamping to pitch.
+    """
     global last_x, last_y, yaw, pitch
     if mouse_down:
         dx = xpos - last_x
@@ -238,11 +291,27 @@ def cursor_pos_callback(window, xpos, ypos):
     last_x, last_y = xpos, ypos
 
 def scroll_callback(window, xoffset, yoffset):
+    """
+    Zoom camera relative to scroll wheel input.
+
+    Side effect:
+    Modifies global 'distance' with clamped upper/lower bounds.
+    """
     global distance
     distance *= (0.95 ** yoffset)
     distance = np.clip(distance, 0.6, 6.0)
 
 def key_callback(window, key, scancode, action, mods):
+    """
+    Keyboard input handler for simulation controls.
+
+    Hotkeys:
+        '[' – reduce lens mass
+        ']' – increase lens mass
+        ESC – exit program
+
+    Logs new values of lens mass and distance for debugging.
+    """
     global LENS_MASS
     if action == glfw.PRESS or action == glfw.REPEAT:
         if key == glfw.KEY_LEFT_BRACKET:
@@ -254,6 +323,19 @@ def key_callback(window, key, scancode, action, mods):
         print(f"LENS_MASS = {LENS_MASS:.2f}, distance = {distance:.2f}")
 
 def main():
+    """
+    Entry point. Initializes GLFW and OpenGL, compiles shaders,
+    sets up geometry, and enters the render loop.
+
+    Loop behavior:
+        - Updates camera position from yaw/pitch/distance
+        - Sends uniform values to the shader
+        - Draws fullscreen quad each frame
+        - Handles input events
+
+    the logic for this entire code was absolute hell. didn't know you needed to be hyper-specific with mouse movement. AI helped SO much it saved me AGES.
+    the whole point of the code is just to get teh simulation up and running anyways, physics lab prof. loved the code too so we good.
+    """
     global yaw, pitch, distance
     if not glfw.init():
         print("GLFW init failed")
