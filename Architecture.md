@@ -22,7 +22,7 @@ the shader to treat every pixel like a ray-tracing sample.
 The camera is orbit-style:
 - Yaw and pitch from mouse drag
 - Radius from scroll wheel
-- Cemtered around the "black hole"'s position
+- Centered around the "black hole"'s position
 
 ## Lensing Model
 Not a general relativity solver — instead a tuned visual approximation:
