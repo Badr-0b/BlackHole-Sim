@@ -4,7 +4,7 @@
 This project renders a physically-inspired gravitational lensing simulation in real time using a custom GLSL fragment shader. The effect models how light bends around a massive rotating black hole, producing warped spacetime visuals and an orbiting accretion disk — fully interactive with camera orbit, zoom, and lens mass control.
 
 ---
-## Update: Docker support for linux-based users has been added. please scroll down to the bottom of this README for instructions.
+## Update: Docker support for linux-based users will soon be added. please scroll down to the bottom of this README for instructions.
 ---
 
 ##  Overview
