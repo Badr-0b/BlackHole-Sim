@@ -4,6 +4,8 @@
 This project renders a physically-inspired gravitational lensing simulation in real time using a custom GLSL fragment shader. The effect models how light bends around a massive rotating black hole, producing warped spacetime visuals and an orbiting accretion disk — fully interactive with camera orbit, zoom, and lens mass control.
 
 ---
+## Update: Docker support for linux-based users has been added. please scroll down to the bottom of this README for instructions.
+---
 
 ##  Overview
 This application demonstrates how GPU ray-marching, shader-based lens distortion, and OpenGL rendering can be combined to visualize extreme gravitational effects. The black hole's mass controls the intensity of light deflection. Users can freely rotate the camera, zoom, and adjust simulation parameters to observe the lensing effect from different viewpoints.
@@ -67,4 +69,36 @@ Variables you can tweak in `FRAGMENT_SHADER_SRC`:
 
 ---
 
-Last Updated: 1 Dec 2025
+### **Running the Black Hole Simulation (Linux)**
+
+1. Build the Docker image:
+
+```bash
+docker build -t blackhole-opengl .
+```
+
+2. Allow Docker access to X11:
+
+```bash
+xhost +local:docker
+```
+
+3. Run the simulation:
+
+```bash
+docker run --rm \
+    -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    --device /dev/dri:/dev/dri \
+    blackhole-opengl
+```
+
+4. After running, optionally remove X11 access:
+
+```bash
+xhost -local:docker
+```
+
+---
+
+Last Updated: 4 Dec 2025
