@@ -71,34 +71,7 @@ Variables you can tweak in `FRAGMENT_SHADER_SRC`:
 
 ### **Running the Black Hole Simulation (Linux)**
 
-1. Build the Docker image:
-
-```bash
-docker build -t blackhole-opengl .
-```
-
-2. Allow Docker access to X11:
-
-```bash
-xhost +local:docker
-```
-
-3. Run the simulation:
-
-```bash
-docker run --rm \
-    -e DISPLAY=$DISPLAY \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    --device /dev/dri:/dev/dri \
-    blackhole-opengl
-```
-
-4. After running, optionally remove X11 access:
-
-```bash
-xhost -local:docker
-```
-
+check DEPLOY.md
 ---
 
-Last Updated: 4 Dec 2025
+Last Updated: 7 Jan 2026
